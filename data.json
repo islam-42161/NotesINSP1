@@ -1,0 +1,66 @@
+{
+    "notes":[
+      {
+        "timestamp": "17 Aug, 2023",
+        "title": "Meeting Notes",
+        "tags": ["work", "meetings"],
+        "note": "Discussed upcoming project deadlines and assigned tasks to team members.\n\n- Delegated UI design to Alice\n- Scheduled code review for next week\n- Client presentation on Friday"
+      },
+      {
+        "timestamp": "16 Aug, 2023",
+        "title": "Grocery List",
+        "tags": ["shopping"],
+        "note": "Need to buy groceries for the week:\n\n- Milk\n- Eggs\n- Bread\n- Vegetables"
+      },
+      {
+        "timestamp": "15 Aug, 2023",
+        "title": "Travel Plans",
+        "tags": ["travel", "vacation"],
+        "note": "Vacation plans:\n\n- Booked flights to the beach\n- Packed sunscreen and swimwear\n- Researched local attractions"
+      },
+      {
+        "timestamp": "14 Aug, 2023",
+        "title": "Coding Project",
+        "tags": ["coding", "programming"],
+        "note": "Working on a new React Native app:\n\n- Implemented main navigation\n- Set up Redux store\n- Integrated API calls for data"
+      },
+      {
+        "timestamp": "13 Aug, 2023",
+        "title": "Recipe",
+        "tags": ["cooking"],
+        "note": "Tried a new pasta recipe:\n\n- Tomato sauce and basil\n- Added garlic for extra flavor\n- Served with grated parmesan"
+      },
+      {
+        "timestamp": "12 Aug, 2023",
+        "title": "Fitness Log",
+        "tags": ["fitness"],
+        "note": "Fitness routine:\n\n- 5 km run in the morning\n- Strength training at the gym\n- Yoga and stretching in the evening"
+      },
+      {
+        "timestamp": "11 Aug, 2023",
+        "title": "Book Recommendations",
+        "tags": ["reading"],
+        "note": "Recent book reads:\n\n- Finished 'The Alchemist'\n- Starting 'Becoming' by Michelle Obama\n- Planning to read 'Sapiens' next"
+      },
+      {
+        "timestamp": "10 Aug, 2023",
+        "title": "Project Ideas",
+        "tags": ["creative"],
+        "note": "Art exhibition project ideas:\n\n- Mixed media sculpture\n- Digital art installation\n- Collaborative mural with local artists"
+      },
+      {
+        "timestamp": "9 Aug, 2023",
+        "title": "Health Check",
+        "tags": ["health"],
+        "note": "Health tasks:\n\n- Dentist appointment next week\n- Refill prescription\n- Schedule annual check-up"
+      },
+      {
+        "timestamp": "8 Aug, 2023",
+        "title": "Language Learning",
+        "tags": ["learning"],
+        "note": "Language learning progress:\n\n- Practiced vocabulary and verbs\n- Watched a short film in target language\n- Scheduled language exchange session"
+      }
+    ]          
+}
+
+  
