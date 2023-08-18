@@ -8,6 +8,12 @@
   <!-- Web -->
 </p>
 
+## 📱 App Demo
+
+> `npx create-react-native-app my-app -t with-reanimated`
+
+- Run `yarn` or `npm install`
+- Run `yarn start` or `npm run start` to try it out.
 ## 🚀 Technologies used
 
 > `npx create-react-native-app my-app -t with-reanimated`
