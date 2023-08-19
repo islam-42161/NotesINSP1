@@ -82,12 +82,20 @@ const Home = ({ navigation }) => {
     scrollX.value = event.contentOffset.x;
   });
   const scrollref = useAnimatedRef();
-  const headerStyle = useAnimatedStyle(() => ({
+  const headertitlesStyle = useAnimatedStyle(() => ({
     transform: [
       {
         translateY: headerPositionY.value,
       },
     ],
+    // opacity: interpolate(
+    //   headerPositionY.value,
+    //   [0, -headerHeight.value],
+    //   [1, 0],
+    //   Extrapolate.CLAMP
+    // ),
+  }));
+  const headerStyle = useAnimatedStyle(() => ({
     opacity: interpolate(
       headerPositionY.value,
       [0, -headerHeight.value],
@@ -95,40 +103,55 @@ const Home = ({ navigation }) => {
       Extrapolate.CLAMP
     ),
   }));
+  const headertitleHeight = useSharedValue(0);
   return (
     <View style={styles.root}>
       {/* headercontainer */}
-      <Animated.View style={[styles.headercontainer]}>
+      <Animated.View
+        onLayout={(event) =>
+          (headertitleHeight.value = event.nativeEvent.layout.height)
+        }
+        style={[styles.headercontainer, headertitlesStyle]}
+      >
         {/* header */}
-        <View style={styles.header}>
-          <Pressable style={styles.header_avatar}>
-            <View style={styles.avatar}>
-              <Image
-                source={
-                  "https://images.pexels.com/photos/8388502/pexels-photo-8388502.jpeg"
-                }
-                contentFit="cover"
-                style={StyleSheet.absoluteFill}
-              />
+        <Animated.View
+          onLayout={(event) =>
+            (headerHeight.value = event.nativeEvent.layout.height)
+          }
+          style={[styles.header, headerStyle]}
+        >
+          <View
+            style={{
+              flexDirection: "row",
+              justifyContent: "space-between",
+              alignItems: "center",
+            }}
+          >
+            <Pressable style={styles.header_avatar}>
+              <View style={styles.avatar}>
+                <Image
+                  source={
+                    "https://images.pexels.com/photos/8388502/pexels-photo-8388502.jpeg"
+                  }
+                  contentFit="cover"
+                  style={StyleSheet.absoluteFill}
+                />
+              </View>
+              <Text style={styles.header_Text}>Floyd Lawton</Text>
+            </Pressable>
+            <View style={styles.header_icons}>
+              <Ionicons name="search" size={24} color="black" />
+              <Entypo name="dots-three-horizontal" size={24} color="black" />
             </View>
-            <Text style={styles.header_Text}>Floyd Lawton</Text>
-          </Pressable>
-          <View style={styles.header_icons}>
-            <Ionicons name="search" size={24} color="black" />
-            <Entypo name="dots-three-horizontal" size={24} color="black" />
           </View>
-        </View>
-        <View
-          style={{
-            borderBottomColor: "lightgray",
-            borderBottomWidth: StyleSheet.hairlineWidth,
-          }}
-        />
-      </Animated.View>
-      {/* body */}
-      <View style={styles.body}>
-        {/* page titles */}
-        <View style={styles.pageTitlesContainer}>
+          <View
+            style={{
+              borderBottomColor: "lightgray",
+              borderBottomWidth: StyleSheet.hairlineWidth,
+            }}
+          />
+        </Animated.View>
+        <View style={[styles.pageTitlesContainer]}>
           {pages.map((value, index) => (
             <PageTitle
               title={value}
@@ -139,6 +162,9 @@ const Home = ({ navigation }) => {
             />
           ))}
         </View>
+      </Animated.View>
+      {/* body */}
+      <View style={styles.body}>
         {/* pages scrollview: horizontal */}
         <Animated.ScrollView
           horizontal
@@ -152,6 +178,7 @@ const Home = ({ navigation }) => {
               navigation={navigation}
               headerHeight={headerHeight}
               headerPositionY={headerPositionY}
+              headertitleHeight={headertitleHeight}
             />
           </View>
           <View style={{ width }}>
@@ -159,6 +186,7 @@ const Home = ({ navigation }) => {
               navigation={navigation}
               headerHeight={headerHeight}
               headerPositionY={headerPositionY}
+              headertitleHeight={headertitleHeight}
             />
           </View>
         </Animated.ScrollView>
@@ -174,18 +202,20 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "white",
     // gap: 15,
-    paddingTop: STATUSBAR_HEIGHT * 1.5,
   },
   headercontainer: {
+    position: "absolute",
+    width: "100%",
+    zIndex: 10,
+    paddingTop: STATUSBAR_HEIGHT * 1.5,
     // paddingTop: STATUSBAR_HEIGHT * 1.5,
     paddingHorizontal: "4%",
     backgroundColor: "white",
-    rowGap: 10, //necessary
+    // backgroundColor: "red",
   },
   header: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
+    // backgroundColor: "orange",
+    rowGap: 10, //necessary
   },
   header_avatar: {
     gap: 10,
@@ -216,8 +246,8 @@ const styles = StyleSheet.create({
   pageTitlesContainer: {
     flexDirection: "row",
     // justifyContent: "space-around",
-    paddingHorizontal: "4%",
     paddingVertical: 15,
+    // backgroundColor: "pink",
   },
   pageTitle: {
     fontSize: 16,

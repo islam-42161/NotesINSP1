@@ -21,11 +21,17 @@ function showTags(tags) {
     }
   });
 }
-const AllNotes = ({ navigation, headerPositionY, headerHeight }) => {
+const AllNotes = ({
+  navigation,
+  headerPositionY,
+  headerHeight,
+  headertitleHeight,
+}) => {
   const lastY = useSharedValue(0);
 
   const scrollHandler = useAnimatedScrollHandler((event) => {
     const deltaY = event.contentOffset.y - lastY.value;
+
     if (deltaY > 0) {
       headerPositionY.value = Math.max(
         headerPositionY.value - deltaY,
@@ -40,13 +46,14 @@ const AllNotes = ({ navigation, headerPositionY, headerHeight }) => {
     }
 
     lastY.value = event.contentOffset.y;
+    console.log(deltaY, headerPositionY.value, headerHeight.value);
   });
   return (
     <View style={styles.container}>
       <AniMasonry
         onScroll={scrollHandler}
         contentContainerStyle={{
-          paddingTop: 10,
+          paddingTop: headertitleHeight.value + 10,
           paddingBottom: 80,
         }}
         estimatedItemSize={200}

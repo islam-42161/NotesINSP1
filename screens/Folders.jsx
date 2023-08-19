@@ -1,10 +1,14 @@
-import { StyleSheet, Text, View } from "react-native";
+import { ScrollView, StyleSheet, Text, View } from "react-native";
 import React from "react";
 
-const Folders = ({ navigation }) => {
+const Folders = ({ navigation, headertitleHeight }) => {
   return (
     <View style={styles.container}>
-      <Text>Folders</Text>
+      <ScrollView
+        contentContainerStyle={{ paddingTop: headertitleHeight.value + 10 }}
+      >
+        <Text>Hello</Text>
+      </ScrollView>
     </View>
   );
 };
@@ -14,6 +18,7 @@ export default Folders;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: "4%",
+    paddingHorizontal: "4%",
+    // backgroundColor: "pink",
   },
 });
