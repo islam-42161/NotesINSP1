@@ -1,10 +1,19 @@
-import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
-import React from "react";
+import {
+  StyleSheet,
+  Text,
+  View,
+  TouchableOpacity,
+  ActivityIndicator,
+} from "react-native";
+import React, { useEffect, useState } from "react";
 import { MasonryFlashList } from "@shopify/flash-list";
 import { LinearGradient } from "expo-linear-gradient";
 import { Ionicons } from "@expo/vector-icons";
 import Animated, {
+  FadeInDown,
+  SlideInDown,
   useAnimatedScrollHandler,
+  useAnimatedStyle,
   useSharedValue,
 } from "react-native-reanimated";
 
@@ -63,7 +72,7 @@ const AllNotes = ({
         renderItem={({ item, index }) => {
           const even = index % 2 === 0 ? true : false;
           return (
-            <View
+            <Animated.View
               style={[
                 styles.node,
                 {
@@ -72,6 +81,7 @@ const AllNotes = ({
                   marginBottom: "6%",
                 },
               ]}
+              entering={index < 8 ? FadeInDown.delay(index * 50) : null}
             >
               <Text style={{ fontSize: 12, color: "gray" }}>
                 {item.timestamp.split(",")[0]}
@@ -107,7 +117,7 @@ const AllNotes = ({
               </View>
 
               <Text style={styles.nodetext}>{item.note}</Text>
-            </View>
+            </Animated.View>
           );
         }}
       />

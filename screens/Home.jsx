@@ -9,7 +9,7 @@ import {
   Dimensions,
   TouchableOpacity,
 } from "react-native";
-import React from "react";
+import React, { useState } from "react";
 import { Image } from "expo-image";
 import { Ionicons, Entypo } from "@expo/vector-icons";
 import Animated, {
@@ -104,6 +104,7 @@ const Home = ({ navigation }) => {
     ),
   }));
   const headertitleHeight = useSharedValue(0);
+  // const [headertitleHeight,setHeaderTitleHeight] = useState(0);
   return (
     <View style={styles.root}>
       {/* headercontainer */}
@@ -208,7 +209,6 @@ const styles = StyleSheet.create({
     width: "100%",
     zIndex: 10,
     paddingTop: STATUSBAR_HEIGHT * 1.5,
-    // paddingTop: STATUSBAR_HEIGHT * 1.5,
     paddingHorizontal: "4%",
     backgroundColor: "white",
     // backgroundColor: "red",
