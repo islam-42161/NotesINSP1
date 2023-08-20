@@ -60,7 +60,14 @@
         "tags": ["learning"],
         "note": "Language learning progress:\n\n- Practiced vocabulary and verbs\n- Watched a short film in target language\n- Scheduled language exchange session"
       }
-    ]          
+    ],
+    "folders":[
+      {"title":"My Notes"},
+      {"title":"To-do List"},
+      {"title":"Journal"},
+      {"title":"Projects"},
+      {"title":"Reading List"}
+    ]      
 }
 
   

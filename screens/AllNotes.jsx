@@ -12,8 +12,10 @@ import { Ionicons } from "@expo/vector-icons";
 import Animated, {
   FadeInDown,
   SlideInDown,
+  runOnJS,
   useAnimatedScrollHandler,
   useAnimatedStyle,
+  useDerivedValue,
   useSharedValue,
 } from "react-native-reanimated";
 
@@ -55,107 +57,120 @@ const AllNotes = ({
     }
 
     lastY.value = event.contentOffset.y;
-    console.log(deltaY, headerPositionY.value, headerHeight.value);
   });
-  return (
-    <View style={styles.container}>
-      <AniMasonry
-        onScroll={scrollHandler}
-        contentContainerStyle={{
-          paddingTop: headertitleHeight.value + 10,
-          paddingBottom: 80,
-        }}
-        estimatedItemSize={200}
-        showsVerticalScrollIndicator={false}
-        data={data}
-        numColumns={2}
-        renderItem={({ item, index }) => {
-          const even = index % 2 === 0 ? true : false;
-          return (
-            <Animated.View
-              style={[
-                styles.node,
-                {
-                  marginLeft: even ? "6%" : "3%",
-                  marginRight: even ? "3%" : "6%",
-                  marginBottom: "6%",
-                },
-              ]}
-              entering={index < 8 ? FadeInDown.delay(index * 50) : null}
-            >
-              <Text style={{ fontSize: 12, color: "gray" }}>
-                {item.timestamp.split(",")[0]}
-              </Text>
-              <Text numberOfLines={3} style={styles.nodetitle}>
-                {item.title}
-              </Text>
-              {/* tags */}
-              <View style={styles.tagsrow}>
-                {item.tags.map((value, index) => {
-                  if (index > 2) {
-                    return null;
-                  } else {
-                    return (
-                      <Text
-                        key={index}
-                        adjustsFontSizeToFit
-                        numberOfLines={1}
-                        style={[
-                          styles.tagStyle,
-                          index === 2
-                            ? {
-                                flex: 1,
-                              }
-                            : null,
-                        ]}
-                      >
-                        {index === 2 ? `${item.tags.length - index}+` : value}{" "}
-                      </Text>
-                    );
-                  }
-                })}
-              </View>
+  const [loaded, setLoaded] = useState(false);
+  useDerivedValue(() => {
+    if (headertitleHeight.value > 0) {
+      runOnJS(setLoaded)(true);
+    }
+  }, [headertitleHeight]);
 
-              <Text style={styles.nodetext}>{item.note}</Text>
-            </Animated.View>
-          );
-        }}
-      />
-      <LinearGradient
-        colors={[
-          "rgba(255, 255, 255, 0)",
-          "rgba(255, 255, 255, 0.1)",
-          "rgba(255, 255, 255, 0.2)",
-          "rgba(255, 255, 255, 0.3)",
-          "rgba(255, 255, 255, 0.4)",
-          "rgba(255, 255, 255, 0.5)",
-          "rgba(255, 255, 255, 0.6)",
-          "rgba(255, 255, 255, 0.7)",
-          "rgba(255, 255, 255, 0.8)",
-          "rgba(255, 255, 255, 0.9)",
-          "rgba(255, 255, 255, 1)",
-        ]}
-        style={styles.bottomComponent}
-      >
-        <TouchableOpacity
-          onPress={() => navigation.navigate("AddNote")}
-          style={styles.add_note_button}
+  // load if calculated header height
+  if (loaded) {
+    return (
+      <View style={styles.container}>
+        <AniMasonry
+          onScroll={scrollHandler}
+          contentContainerStyle={{
+            paddingTop: headertitleHeight.value + 10,
+            paddingBottom: 80,
+          }}
+          estimatedItemSize={200}
+          showsVerticalScrollIndicator={false}
+          data={data}
+          numColumns={2}
+          renderItem={({ item, index }) => {
+            const even = index % 2 === 0 ? true : false;
+            return (
+              <Animated.View
+                style={[
+                  styles.node,
+                  {
+                    marginLeft: even ? "6%" : "3%",
+                    marginRight: even ? "3%" : "6%",
+                    marginBottom: "6%",
+                  },
+                ]}
+                entering={index < 8 ? FadeInDown.delay(index * 50) : null}
+              >
+                <Text style={{ fontSize: 12, color: "gray" }}>
+                  {item.timestamp.split(",")[0]}
+                </Text>
+                <Text numberOfLines={3} style={styles.nodetitle}>
+                  {item.title}
+                </Text>
+                {/* tags */}
+                <View style={styles.tagsrow}>
+                  {item.tags.map((value, index) => {
+                    if (index > 2) {
+                      return null;
+                    } else {
+                      return (
+                        <Text
+                          key={index}
+                          adjustsFontSizeToFit
+                          numberOfLines={1}
+                          style={[
+                            styles.tagStyle,
+                            index === 2
+                              ? {
+                                  flex: 1,
+                                }
+                              : null,
+                          ]}
+                        >
+                          {index === 2 ? `${item.tags.length - index}+` : value}{" "}
+                        </Text>
+                      );
+                    }
+                  })}
+                </View>
+
+                <Text style={styles.nodetext}>{item.note}</Text>
+              </Animated.View>
+            );
+          }}
+        />
+        <LinearGradient
+          colors={[
+            "rgba(255, 255, 255, 0)",
+            "rgba(255, 255, 255, 0.1)",
+            "rgba(255, 255, 255, 0.2)",
+            "rgba(255, 255, 255, 0.3)",
+            "rgba(255, 255, 255, 0.4)",
+            "rgba(255, 255, 255, 0.5)",
+            "rgba(255, 255, 255, 0.6)",
+            "rgba(255, 255, 255, 0.7)",
+            "rgba(255, 255, 255, 0.8)",
+            "rgba(255, 255, 255, 0.9)",
+            "rgba(255, 255, 255, 1)",
+          ]}
+          style={styles.bottomComponent}
         >
-          <Ionicons name="add" size={24} color="white" />
-          <Text
-            style={{
-              fontSize: 18,
-              color: "white",
-              fontWeight: "bold",
-              letterSpacing: -1,
-            }}
+          <TouchableOpacity
+            onPress={() => navigation.navigate("AddNote")}
+            style={styles.add_note_button}
           >
-            Add new note
-          </Text>
-        </TouchableOpacity>
-      </LinearGradient>
-    </View>
-  );
+            <Ionicons name="add" size={24} color="white" />
+            <Text
+              style={{
+                fontSize: 18,
+                color: "white",
+                fontWeight: "bold",
+                letterSpacing: -1,
+              }}
+            >
+              Add new note
+            </Text>
+          </TouchableOpacity>
+        </LinearGradient>
+      </View>
+    );
+  } else {
+    return (
+      <ActivityIndicator size={"large"} color={"black"} style={{ flex: 1 }} />
+    );
+  }
 };
 
 export default AllNotes;
