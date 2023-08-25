@@ -62,11 +62,11 @@
       }
     ],
     "folders":[
-      {"title":"My Notes"},
-      {"title":"To-do List"},
-      {"title":"Journal"},
-      {"title":"Projects"},
-      {"title":"Reading List"}
+      {"title":"My Notes","icon":"library-books"},
+      {"title":"To-do list","icon":"check"},
+      {"title":"Journal","icon":"edit"},
+      {"title":"Projects","icon":"library-books"},
+      {"title":"Reading List","icon":"menu-book"}
     ]      
 }
 

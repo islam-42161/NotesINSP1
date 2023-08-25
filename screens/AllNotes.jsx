@@ -64,15 +64,17 @@ const AllNotes = ({
       runOnJS(setLoaded)(true);
     }
   }, [headertitleHeight]);
-
+  const containerStyle = useAnimatedStyle(() => ({
+    top: headertitleHeight.value + headerPositionY.value,
+  }));
   // load if calculated header height
   if (loaded) {
     return (
-      <View style={styles.container}>
+      <Animated.View style={[styles.container]}>
         <AniMasonry
           onScroll={scrollHandler}
           contentContainerStyle={{
-            paddingTop: headertitleHeight.value + 10,
+            paddingTop: headertitleHeight.value,
             paddingBottom: 80,
           }}
           estimatedItemSize={200}
@@ -156,7 +158,7 @@ const AllNotes = ({
               style={{
                 fontSize: 18,
                 color: "white",
-                fontWeight: "bold",
+                // fontWeight: "bold",
                 letterSpacing: -1,
               }}
             >
@@ -164,7 +166,7 @@ const AllNotes = ({
             </Text>
           </TouchableOpacity>
         </LinearGradient>
-      </View>
+      </Animated.View>
     );
   } else {
     return (
@@ -176,7 +178,11 @@ const AllNotes = ({
 export default AllNotes;
 
 const styles = StyleSheet.create({
-  container: { flex: 1 },
+  container: {
+    flex: 1,
+    // backgroundColor: "red",
+    paddingTop: 10,
+  },
   node: {
     backgroundColor: "rgba(0,0,0,0.1)",
     padding: 10,
